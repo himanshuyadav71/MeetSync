@@ -10,7 +10,7 @@ const VideoPlayer = ({ stream, isLocal, username }) => {
     }, [stream]);
 
     return (
-        <div className="relative bg-gray-800 rounded-xl overflow-hidden aspect-video shadow-lg group">
+        <div className="absolute inset-0 bg-gray-800 rounded-xl overflow-hidden shadow-lg group">
             {stream ? (
                <video 
                    ref={videoRef}

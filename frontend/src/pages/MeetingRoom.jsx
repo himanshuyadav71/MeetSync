@@ -102,13 +102,13 @@ const MeetingRoom = () => {
                 </div>
 
                 {/* Video Grid */}
-                <div className="flex-1 p-4 flex items-center justify-center pt-16">
-                    <div className={`w-full max-w-7xl grid gap-4 ${gridColsClass} h-full max-h-full content-center`}>
-                        <div className="rounded-xl overflow-hidden shadow-2xl border border-gray-700/50 bg-gray-800 flex">
+                <div className="flex-1 p-2 md:p-4 flex items-center justify-center pt-16 md:pt-20 overflow-hidden">
+                    <div className={`w-full max-w-7xl grid gap-2 md:gap-4 ${gridColsClass} h-full content-center`}>
+                        <div className="rounded-xl overflow-hidden shadow-2xl border border-gray-700/50 bg-gray-800 flex h-full min-h-[150px] relative">
                             <VideoPlayer stream={localStream} isLocal={true} username={user.username} />
                         </div>
                         {peers.map(peer => (
-                           <div key={peer.peerId} className="rounded-xl overflow-hidden shadow-2xl border border-gray-700/50 bg-gray-800 flex">
+                           <div key={peer.peerId} className="rounded-xl overflow-hidden shadow-2xl border border-gray-700/50 bg-gray-800 flex h-full min-h-[150px] relative">
                                <VideoPlayer stream={peer.stream} isLocal={false} username={peer.username} />
                            </div>
                         ))}
