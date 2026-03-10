@@ -15,6 +15,7 @@ export const useWebRTC = (roomId, userId, username) => {
     iceServers: [
       { urls: 'stun:stun.l.google.com:19302' },
       { urls: 'stun:global.stun.twilio.com:3478' },
+      { urls: 'stun:stun1.l.google.com:19302' },
       { 
         urls: 'turn:openrelay.metered.ca:80',
         username: 'openrelayproject',
@@ -26,6 +27,7 @@ export const useWebRTC = (roomId, userId, username) => {
         credential: 'openrelayproject'
       }
     ],
+    iceCandidatePoolSize: 10,
   };
 
   useEffect(() => {
@@ -37,7 +39,17 @@ export const useWebRTC = (roomId, userId, username) => {
     // Setup local media
     const initMedia = async () => {
       try {
-        const stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
+        const stream = await navigator.mediaDevices.getUserMedia({ 
+            video: {
+                facingMode: "user",
+                width: { ideal: 640 },
+                height: { ideal: 480 }
+            }, 
+            audio: {
+                echoCancellation: true,
+                noiseSuppression: true
+            } 
+        });
         setLocalStream(stream);
         localStreamRef.current = stream;
 
