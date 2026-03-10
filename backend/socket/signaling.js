@@ -28,18 +28,8 @@ function initSignaling(server) {
             // Notify others in the room
             socket.to(roomId).emit('user-connected', userId, username, socket.id);
 
-            // WebRTC Signaling Events
-            socket.on('offer', (payload) => {
-                io.to(payload.target).emit('offer', payload);
-            });
-
-            socket.on('answer', (payload) => {
-                io.to(payload.target).emit('answer', payload);
-            });
-
-            socket.on('ice-candidate', (payload) => {
-                io.to(payload.target).emit('ice-candidate', payload);
-            });
+            // PeerJS handles WebRTC underlying signaling automatically.
+            // Leaving custom features only below:
 
             // Features: Chat
             socket.on('chat-message', (message) => {

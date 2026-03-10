@@ -81,7 +81,7 @@ const MeetingRoom = () => {
     if (totalParticipants > 4) gridColsClass = "grid-cols-2 md:grid-cols-3";
 
     return (
-        <div className="flex flex-col md:flex-row h-screen bg-gray-900 fixed inset-0">
+        <div className="flex flex-col md:flex-row h-[100dvh] bg-gray-900 fixed inset-0 overflow-hidden">
             {/* Main Video Area */}
             <div className={`flex-1 flex flex-col transition-all duration-300 w-full ${isChatOpen ? 'lg:pr-[320px]' : ''}`}>
                 {/* Header (Optional) */}
