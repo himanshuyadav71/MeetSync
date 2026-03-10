@@ -81,22 +81,22 @@ const MeetingRoom = () => {
     if (totalParticipants > 4) gridColsClass = "grid-cols-2 md:grid-cols-3";
 
     return (
-        <div className="flex h-screen bg-gray-900 fixed inset-0">
+        <div className="flex flex-col md:flex-row h-screen bg-gray-900 fixed inset-0">
             {/* Main Video Area */}
-            <div className={`flex-1 flex flex-col transition-all duration-300 ${isChatOpen ? 'pr-[320px]' : ''}`}>
+            <div className={`flex-1 flex flex-col transition-all duration-300 w-full ${isChatOpen ? 'lg:pr-[320px]' : ''}`}>
                 {/* Header (Optional) */}
                 <div className="absolute top-0 left-0 right-0 p-4 z-10 pointer-events-none flex justify-between items-start">
-                    <div className="bg-black/40 backdrop-blur-md px-4 py-3 rounded-lg text-white font-medium text-sm pointer-events-auto flex items-center space-x-4 shadow border border-white/10">
-                        <span>Meeting ID: {roomId}</span>
-                        <div className="w-[1px] h-4 bg-white/20"></div>
+                    <div className="bg-black/40 backdrop-blur-md px-3 md:px-4 py-2 md:py-3 rounded-lg text-white font-medium text-xs md:text-sm pointer-events-auto flex items-center space-x-2 md:space-x-4 shadow border border-white/10 max-w-full overflow-hidden">
+                        <span className="truncate">ID: {roomId}</span>
+                        <div className="w-[1px] h-4 bg-white/20 shrink-0"></div>
                         <button 
                             onClick={() => {
                                 navigator.clipboard.writeText(`${window.location.origin}/meeting/${roomId}`);
                                 alert('Meeting Link Copied!');
                             }} 
-                            className="text-indigo-300 hover:text-indigo-200 flex items-center transition bg-white/10 px-2 py-1 rounded"
+                            className="text-indigo-300 hover:text-indigo-200 flex items-center transition bg-white/10 px-2 py-1 rounded whitespace-nowrap shrink-0"
                         >
-                            Copy Invite Link
+                            Copy Link
                         </button>
                     </div>
                 </div>
@@ -116,7 +116,7 @@ const MeetingRoom = () => {
                 </div>
 
                 {/* Bottom Controls Bar */}
-                <div className="h-20 bg-gray-800/90 backdrop-blur-lg border-t border-gray-700 flex items-center justify-center px-6 gap-4 z-20">
+                <div className="min-h-[5rem] py-3 bg-gray-800/90 backdrop-blur-lg border-t border-gray-700 flex flex-wrap items-center justify-center px-4 gap-3 md:gap-4 z-20">
                     <button 
                         onClick={() => toggleAudio()} 
                         className={`p-4 rounded-full transition ${isAudioMuted ? 'bg-red-500 hover:bg-red-600 text-white' : 'bg-gray-700 hover:bg-gray-600 text-gray-200'}`}
@@ -149,7 +149,7 @@ const MeetingRoom = () => {
 
                      <button 
                         onClick={leaveMeeting} 
-                        className="p-4 rounded-full bg-red-600 hover:bg-red-700 text-white ml-8 transition shadow-lg shadow-red-900/50"
+                        className="p-4 rounded-full bg-red-600 hover:bg-red-700 text-white ml-2 md:ml-8 transition shadow-lg shadow-red-900/50"
                     >
                         <PhoneOff size={22}/>
                     </button>
@@ -157,7 +157,7 @@ const MeetingRoom = () => {
             </div>
 
             {/* Sidebar Chat */}
-            <div className={`fixed top-0 right-0 bottom-0 w-[320px] bg-white transform transition-transform duration-300 ${isChatOpen ? 'translate-x-0 shadow-2xl' : 'translate-x-full'} flex flex-col z-30`}>
+            <div className={`fixed top-0 right-0 bottom-0 w-full md:w-[320px] bg-white transform transition-transform duration-300 ${isChatOpen ? 'translate-x-0 shadow-2xl' : 'translate-x-full'} flex flex-col z-30`}>
                 <div className="p-4 border-b flex items-center justify-between bg-gray-50">
                     <h3 className="font-semibold text-gray-800">In-call Messages</h3>
                     <button onClick={() => setIsChatOpen(false)} className="text-gray-500 hover:text-gray-800">×</button>
