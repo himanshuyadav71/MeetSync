@@ -28,8 +28,12 @@ app.use('/api/meetings', require('./routes/meetings'));
 if (process.env.NODE_ENV === 'production') {
     app.use(express.static(path.join(__dirname, '../frontend/dist')));
     
-    app.all('*', (req, res) => {
-        res.sendFile(path.resolve(__dirname, '../frontend/dist/index.html'));
+    app.use((req, res, next) => {
+        if (req.method === 'GET') {
+            res.sendFile(path.resolve(__dirname, '../frontend/dist/index.html'));
+        } else {
+            next();
+        }
     });
 } else {
     app.get('/', (req, res) => {
