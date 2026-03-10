@@ -10,11 +10,7 @@ const auth = require('../middleware/auth');
 // @access  Public
 router.post('/signup', async (req, res) => {
     try {
-        const { username, email, password, otp } = req.body;
-
-        if (!otp) {
-            return res.status(400).json({ msg: 'OTP is required' });
-        }
+        const { username, email, password } = req.body;
 
         let user = await User.findOne({ email });
         if (user) {
